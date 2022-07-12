@@ -1,11 +1,36 @@
 package concordance;
 
+import java.io.FileNotFoundException;
+
+import util.ConAppOptions;
+
+
 public class ConcordanceMainApp {
 
 	public static void main(String[] args) {
-		
+
 		if(args.length <= 0) {	
 			System.err.println("You must provide file for analyzing !");
+			System.exit(-1);
+		}
+		
+		System.out.println("Start processing concordance analysis. Input file name is " + args[0]);
+		
+		
+		ConAppOptions options = new ConAppOptions();
+		options.setFilePath( args[0] );
+		options.setLang("en");
+		options.setSentenceSeperator(".!");
+		options.setPunctuations("[!\"#$%&'()*+,-./:;<=>?\\[\\]^_`{|}~]");
+//		options.setOrderName("alpabetical");
+		options.setOrderName("mostfrequent");
+	
+		
+		try {
+			(new Concordance()).startAnalyzeFile(options);
+		} catch (FileNotFoundException e) {
+			System.err.println(args[0] + " file not found for concordance analysis !");
+			e.printStackTrace();
 			System.exit(-1);
 		}
 

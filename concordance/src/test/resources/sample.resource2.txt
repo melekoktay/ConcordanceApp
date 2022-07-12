@@ -1,0 +1,1 @@
+Given an arbitrary text document written in English. This is a Concordance of the above text. what is e.g. the matrix.
