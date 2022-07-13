@@ -12,7 +12,7 @@ Welcome to Concordance Application
 
 **Dependendencies**: minimum **Java** JRE version **1.8** and **JUnit** version **4.13.2**
 
-**Development Environement**: 
+**Development Environment**: 
 - Eclipse IDE for Java Developers Version: **2021-12 (4.22.0)**
 - MacBook Pro , Dual-Core Intel Core i5, **8 GB** Memory
 
