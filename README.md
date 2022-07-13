@@ -1,13 +1,16 @@
 # ConcordanceApp
 
-Welcome to Concordance Application !
+Welcome to Concordance Application
 ===========
 
-— A Java SE project has been implemented on Eclipse IDE. It is created as a Maven project in order to simplify third-party library installation. The program finds the frequencies of the words and their sentence number. 
-— JUnit, unit testing, Framework has been integrated into the project in order to perform Test-Driven development.
-— Strategy, Singleton, and Template Method Patterns have been applied to ConcordanceApp.
+- A Java SE project has been implemented on Eclipse IDE. It is created as a Maven project in order to simplify third-party library installation. The program finds the frequencies of the words and their sentence number. 
+- JUnit, unit testing, Framework has been integrated into the project in order to perform Test-Driven development.
+- Strategy, Singleton, and Template Method Patterns have been applied to ConcordanceApp.
 - ConcordanceApp takes two files as input: 1) The text file that includes the sentences that will be analyzed and 2) the English abbreviations file. The program transforms this abbr. into special form in order to count them correctly. Abbreviations file includes abbreviations with dots like  i.e. , dr., e.g., etc. Before demonstrating the result, transformed abbreviations revert back to the original form.
 - The results have been sorted in alphabetical order as default. Users can change the ordering strategy and list according to the frequency of words in descending order.
+
+
+Dependendencies: minimum Java JRE version 1.8 and JUnit version 4.13.2
 
 
 A sample program console is given below:
