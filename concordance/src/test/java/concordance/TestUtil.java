@@ -13,7 +13,7 @@ public class TestUtil {
 		options.setLang("en");
 		options.setSentenceSeperator(".!");
 		options.setPunctuations("[!\"#$%&'()*+,-./:;<=>?\\[\\]^_`{|}~]");
-		options.setOrderName("alpabetical");
+		options.setOrderName("alphabetical");
 		options.setWordSeperator(" ");
 		
 		return options;

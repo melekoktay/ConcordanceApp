@@ -2,13 +2,11 @@ package concordance;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,21 +21,10 @@ public class SampleResource1Test {
 	public void setUp() throws IOException, InterruptedException {
 
 		StringBuilder pathBuilder = TestUtil.defaultSourcePath("sample.resource1.txt" );
-//		
-//		String path = new File(".").getCanonicalPath();
-//		
-//		String separator = System.getProperty("file.separator");
-//		String sampleFile1Path = path + separator + "src" + separator + "test" + separator + "resources" + separator
-//				+ "sample.resource1.txt";
 
 		options = TestUtil.getDefaultOptions();
 		options.setFilePath(pathBuilder.toString());
 	}
-
-//	@After
-//	public void tearDown() {
-//		System.out.println("Test.tearDown");
-//	}
 
 	@Test(expected = java.io.FileNotFoundException.class)
 	public void testFileNotExist() throws Exception {
@@ -74,10 +61,9 @@ public class SampleResource1Test {
 
 		List<Word> resultList = conApp.getConcordanceList();
 
-		//System.out.println(preparedList.toArray().toString());
-		//System.out.println(resultList.toArray().toString());
 
 		assertEquals("Elementh size are equal ", resultList.size(), preparedList.size());
+
 
 		for (int i = 0; i < resultList.size(); i++) {
 			Word w1 = resultList.get(i);
