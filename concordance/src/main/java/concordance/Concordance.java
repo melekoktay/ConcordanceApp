@@ -1,7 +1,6 @@
 package concordance;
 
 import java.io.FileNotFoundException;
-import java.util.Hashtable;
 import java.util.List;
 
 import controller.ConcordanceService;

@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Hashtable;
-import java.util.Map;
 import java.util.Properties;
 
 
@@ -31,14 +30,9 @@ public class EnglishAbbreviation {
 		
 		Properties prop = new Properties();
 		String propertiesFilePath = path + separator + "src" + separator + "main" + separator + "resources" + separator + "english.abbrv.properties";
-		//System.err.println(propertiesFilePath);
-		prop.load( new FileInputStream(propertiesFilePath));
-		
-		//prop.keySet().forEach(x -> System.out.println(x));
-		//prop.forEach((key, value) -> System.out.println("Key : " + key + ", Value : " + value));
-		
-		//System.err.println("Proj File Path " + path);
 
+		
+		prop.load( new FileInputStream(propertiesFilePath));
 		
 		return prop;
 	}
