@@ -16,13 +16,17 @@ A sample program console is given below:
 java -jar concordance-0.0.1-SNAPSHOT.jar /Users/melekoktay/git/ConcordanceApp/concordance/src/main/resources/arista.sample.txt /Users/melekoktay/git/ConcordanceApp/concordance/src/main/resources/english.abbrv.properties
 ```
 
-arista.sample.txt
-===========
-[arista.sample.txt](https://github.com/melekoktay/ConcordanceApp/files/9103592/arista.sample.txt)
-
-
-
-english.abbrv.properties
+arista.sample.txt input text file
 ===========
 
-<img width="321" alt="ConcordanceAppOutput" src="https://user-images.githubusercontent.com/6720099/178768086-05dd6fdf-8a40-4516-9090-216c896333da.png">
+<img width="588" alt="aristaSampleFile" src="https://user-images.githubusercontent.com/6720099/178770613-f30c5a2e-63f6-4a79-8924-ce8ca7e180bb.png">
+
+
+
+english.abbrv.properties 
+===========
+
+
+Program Output
+===========
+<img width="249" alt="abbrvFile" src="https://user-images.githubusercontent.com/6720099/178770703-e53d7b96-a60e-4b3e-9a53-5720c2685504.png">
