@@ -8,9 +8,13 @@ Welcome to Concordance Application
 - Strategy, Singleton, and Template Method Patterns have been applied to ConcordanceApp.
 - ConcordanceApp takes two files as input: 1) The text file that includes the sentences that will be analyzed and 2) the English abbreviations file. The program transforms this abbr. into special form in order to count them correctly. Abbreviations file includes abbreviations with dots like  i.e. , dr., e.g., etc. Before demonstrating the result, transformed abbreviations revert back to the original form.
 - The results have been sorted in alphabetical order as default. Users can change the ordering strategy and list according to the frequency of words in descending order.
+- If text file that includes the sentences is greater than **500 MB** , Application stop execution and inform user about the status
 
+**Dependendencies**: minimum **Java** JRE version **1.8** and **JUnit** version **4.13.2**
 
-Dependendencies: minimum Java JRE version 1.8 and JUnit version 4.13.2
+**Development Environement**: 
+- Eclipse IDE for Java Developers Version: **2021-12 (4.22.0)**
+- MacBook Pro , Dual-Core Intel Core i5, **8 GB** Memory
 
 
 A sample program console is given below:
