@@ -20,10 +20,11 @@ public class ConcordanceMainApp {
 		ConAppOptions options = new ConAppOptions();
 		options.setFilePath( args[0] );
 		options.setLang("en");
-		options.setSentenceSeperator(".!");
+		options.setSentenceSeperator(".!\n");
 		options.setPunctuations("[!\"#$%&'()*+,-./:;<=>?\\[\\]^_`{|}~]");
-//		options.setOrderName("alpabetical");
-		options.setOrderName("mostfrequent");
+		options.setOrderName("alphabetical");
+//		options.setOrderName("mostfrequent");
+		options.setWordSeperator(" ");
 	
 		
 		try {

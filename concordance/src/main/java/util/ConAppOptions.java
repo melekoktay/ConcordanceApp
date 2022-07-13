@@ -11,6 +11,16 @@ public class ConAppOptions {
 	private String punctuations = null;
 	
 	private String orderName = null;
+	
+	private String wordSeperator = null;
+
+	public String getWordSeperator() {
+		return wordSeperator;
+	}
+
+	public void setWordSeperator(String wordSeperator) {
+		this.wordSeperator = wordSeperator;
+	}
 
 	public String getOrderName() {
 		return orderName;

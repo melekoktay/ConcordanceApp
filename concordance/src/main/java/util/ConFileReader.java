@@ -8,10 +8,6 @@ import java.util.List;
 
 public class ConFileReader implements AbstractReader {
 
-	public ConFileReader() {
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
 	public List<String> read(BufferedReader br) {
 		List<String> lineList = new ArrayList<>();

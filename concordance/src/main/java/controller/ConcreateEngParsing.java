@@ -17,19 +17,22 @@ import util.ConAppOptions;
 import util.ConFileReader;
 import util.EnglishAbbreviation;
 
-public class ConcreateEngParsing implements ParsingInterface {
+public class ConcreateEngParsing extends ParsingTemplate {
 
-	private List<String> readFromFile(ConAppOptions options) {
-		
-		AbstractReader fileReader = new ConFileReader();
+	/**
+	 * Method read files from file system and puts lines inside in list data structures.
+	 * 
+	 * @param ConAppOptions contains file path that will be open
+	 * @return List<String> list of lines that is read from file
+	 */
+	protected List<String> readFromFile(ConAppOptions options) {
 		List<String> list = null ;
+		AbstractReader fileReader = new ConFileReader();
+
 		try {
 			list = fileReader.read(new BufferedReader(new FileReader(options.getFilePath())));
 		} catch (FileNotFoundException e) {
-		
-			e.printStackTrace();
-			
-			//TODO handle this position
+			System.err.println("Could not read File " + options.getFilePath() + " Message " + e.getMessage());
 			list = null;
 		}
 		
@@ -39,27 +42,19 @@ public class ConcreateEngParsing implements ParsingInterface {
 	
 
 	/**
-	 * responsible sanitize input sentence and remove abbreviations	
+	 * Responsible sanitize input sentence and replace abbreviations to special forms.
 	 * @param list
 	 * @return
 	 */
-	private List<String> sanitizing(List<String> list) {
-		
-		//List<String> sanitizeList = new ArrayList<>();
+	protected List<String> sanitizing(List<String> list) {
 		Hashtable<String, String> abbrTable = null;
 		EnglishAbbreviation engAbbrev = EnglishAbbreviation.instance();
 		try {
 			abbrTable = engAbbrev.getAbbrevTable();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Could not get abbrv. table " + e.getMessage());
 			return null;
 		}
-		
-		//System.err.println(abbrTable);
-		
-		//for(String sourceLine : list) {
-			
 			
 		for(int i=0; i < list.size() ;i++)	{
 			String sourceLine = list.get(i);
@@ -72,57 +67,54 @@ public class ConcreateEngParsing implements ParsingInterface {
 	            String abbrvKeyString = abbrKeyStr.nextElement();
 	            
 	            if( sourceLine.indexOf(abbrvKeyString) != -1) {
-	            	
-	            	//System.out.println(sourceLine);
-	            	//System.out.println(abbrvKeyString + " " + abbrTable.get( abbrvKeyString ));
-	            	
 	            	sourceLine = sourceLine.replace( abbrvKeyString , abbrTable.get( abbrvKeyString ));
-	            	
-	            	//System.out.println(sourceLine);
-	      
 	            	list.set(i, sourceLine);
 	            }
 	        }	
 		}
-		
 		return list;
 	}
 	
-	private List<String> sentenceTokenizer(List<String> list, ConAppOptions options){
+	/**
+	 * Method get list of lines as a parameter and separate these lines to sentences.
+	 * 
+	 * @param List<String> list of lines that read from file
+	 * @param ConAppOptions application need options of sentence separators
+	 * @return List of sentences
+	 */
+	protected List<String> sentenceTokenizer(List<String> list, ConAppOptions options){
 		List<String> sentenceList = new ArrayList<>();
 		
 		for(int i=0;i<list.size();i++) {
 			String strLine = list.get(i);
-			
-			//System.out.println(strLine);
 			
 			StringTokenizer sentencetokenizer = new StringTokenizer(strLine, options.getSentenceSeperator());
 			
 			while(sentencetokenizer.hasMoreTokens()) {
 				String sentence = sentencetokenizer.nextToken();
 				sentenceList.add(sentence);
-				System.out.println(sentence);
 			}
 		}
 		return sentenceList;
 	}
 	
-	private Hashtable<String, Word> process(List<String> list, ConAppOptions options) {
+	/**
+	 * Method gets list of sentences and tokenize these sentences to words.
+	 * And then calculates concordance (frequency of word & occurences list within sentences)
+	 * 
+	 * @param List<String> list of sentences
+	 * @param ConAppOptions application need options of word separators
+	 */
+	protected Hashtable<String, Word> wordTokenizer(List<String> list, ConAppOptions options) {
 		Hashtable<String, Word> wordTable = new Hashtable<String, Word>();
 		for(int sentenceIndex = 0; sentenceIndex < list.size(); sentenceIndex++) {
 
 			String sentence =  list.get(sentenceIndex);
 			
-			//System.err.println(sentence);
-			
-			StringTokenizer words = new StringTokenizer(sentence, " ");
-
-			//System.err.println("Number of Words " + words.countTokens());
-			
-			while(words.hasMoreTokens()) {
-				//String word = words.nextToken().trim();				
+			StringTokenizer words = new StringTokenizer(sentence, options.getWordSeperator());
+	
+			while(words.hasMoreTokens()) {			
 				String word = AppUtil.removePunctuations(words.nextToken(), options.getPunctuations());				
-				//System.err.println(word);
 				
 				if(wordTable.containsKey(word)){
 					Word wordEntity = wordTable.get(word);
@@ -131,7 +123,7 @@ public class ConcreateEngParsing implements ParsingInterface {
 					wordTable.put(word, wordEntity);
 					
 				}else{
-					Word newWordBean = new Word(word, 1, sentenceIndex +1);
+					Word newWordBean = new Word(word, 1, sentenceIndex+1);
 					wordTable.put(word, newWordBean);
 				}
 				
@@ -143,14 +135,18 @@ public class ConcreateEngParsing implements ParsingInterface {
 
 	}
 
-	private List<Word> revertAbbrvBack(List<Word> list) {
+	/**
+	 * After counting words process has been finished, special form abbreviation words must revert back to original form
+	 * @param list of words objects.
+	 * @return final result is list of words
+	 */
+	protected List<Word> revertAbbrvBack(List<Word> list) {
 		Hashtable<String, String> revertedAbbrTable = null;
 		EnglishAbbreviation engAbbrev = EnglishAbbreviation.instance();
 		try {
 			revertedAbbrTable = engAbbrev.getConvertedAbbrevTable();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.err.println("Could not retrieve Abbrv Table " + e.getMessage());
 			return null;
 		}
 		
@@ -165,12 +161,8 @@ public class ConcreateEngParsing implements ParsingInterface {
 	            String abbrvKeyString = abbrKeyStr.nextElement();
 	            
 	            if(abbrvKeyString.equals(word.getWord())) {
-//	            	System.err.println(abbrvKeyString + " " +  revertedAbbrTable.get(abbrvKeyString)  +" " + word);
-	            	
 	            	word.setWord(revertedAbbrTable.get(abbrvKeyString));
-	            	
 	            	list.set(i, word);
-	            
 	            }
 	        }
 			
@@ -178,22 +170,5 @@ public class ConcreateEngParsing implements ParsingInterface {
 		
 		return list;
 	}
-
-	@Override
-	public List<Word> parsingExecution(ConAppOptions options) {
-		List<String> rawSentenceList = readFromFile(options);
-		List<String> pureSentenceList = sanitizing(rawSentenceList);
-		
-		List<String> list = sentenceTokenizer(pureSentenceList, options);
-		
-		Hashtable<String, Word> wordTable = process(list, options);
-		
-		List<Word> finalWordList = revertAbbrvBack(AppUtil.convertHashtableToList(wordTable));
-		
-		return finalWordList;
-	}
-
-
-
 
 }

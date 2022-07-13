@@ -21,10 +21,22 @@ public class AppUtil {
 		}	
 	}
 	
+	public static String alpabeticalSequence(int i) {
+	    return i < 0 ? "" : alpabeticalSequence((i / 26) - 1) + (char)(65 + i % 26);
+	}
+	
 	public static void printArrayList(List<Word> list) {
-		for(Word w: list) {
-			System.out.println(w);
-		}	
+		System.out.println();
+		
+		String fmt = "%-5s %s\n";
+
+		
+		for(int i=0; i<list.size();i++) {
+			Word w = list.get(i);
+			System.out.printf(fmt, alpabeticalSequence(i).toLowerCase(),w.toString());
+		}
+		
+		System.out.println();
 	}
 	
 	public static List<Word> convertHashtableToList(Hashtable<String,Word> wordTable){

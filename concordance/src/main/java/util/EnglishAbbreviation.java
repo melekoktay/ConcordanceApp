@@ -31,7 +31,7 @@ public class EnglishAbbreviation {
 		
 		Properties prop = new Properties();
 		String propertiesFilePath = path + separator + "src" + separator + "main" + separator + "resources" + separator + "english.abbrv.properties";
-		System.err.println(propertiesFilePath);
+		//System.err.println(propertiesFilePath);
 		prop.load( new FileInputStream(propertiesFilePath));
 		
 		//prop.keySet().forEach(x -> System.out.println(x));

@@ -2,8 +2,6 @@ package controller;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
 
 import entity.Word;
@@ -11,26 +9,37 @@ import util.AppUtil;
 import util.ConAppOptions;
 
 
-public class FileService implements Runnable {
+public class ConcordanceService implements Runnable {
 
-	ParsingInterface parser;
+	ParsingTemplate parserTemplate;
 	
 	private ConAppOptions options;
 	
 	private List<Word> concordanceList;
 
-	public FileService(ConAppOptions newOptions) throws FileNotFoundException {
+	public ConcordanceService(ConAppOptions newOptions) throws FileNotFoundException {
 		
 		setOptions(newOptions);
 		
 		File f = new File(options.getFilePath());
-		if(!f.exists() /** && f.isDirectory() */) {
+		if(!f.exists() ) {
+			System.err.println("File " + f.getName() + " is not exist !");
 			throw new FileNotFoundException();
 		}
 		
-	    //TODO check file size ! If it is TOO BIG to open, throw an exceptions 
-		//f.getTotalSpace();
+		if(f.isDirectory()) {
+			System.err.println("Given path is Directory  !");
+			throw new FileNotFoundException();
+		}
 		
+		long sizeInBytes = f.length();
+		//transform in MB
+		long sizeInMb = sizeInBytes / (1024 * 1024);
+		
+		if(sizeInMb > 500) {
+			System.err.println("Input file could not exceed 500MB !");
+			System.exit(-2);
+		}
 		
 	}
 	
@@ -40,19 +49,24 @@ public class FileService implements Runnable {
 		try {
 			thread.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Thread could not be join, program is terminated !");
+			System.exit(-1);
 		}
 	}
 
 	public void run() {
 		SortingStrategy sortStrategy;
-		parser = new ConcreateEngParsing();
+		parserTemplate = new ConcreateEngParsing();
 		
 		
-		List<Word> wordList = parser.parsingExecution(getOptions());
+		List<Word> wordList = parserTemplate.parsingTemplateMethod(getOptions());
+		if(wordList == null) {
+			System.err.println("Anomaly occurs, could not continue execution!");
+			return;
+		}
 
-		if(getOptions().getOrderName().equals("alpabetical"))			
+		if(getOptions().getOrderName().equals("alphabetical"))			
 			sortStrategy = new AlphabeticalOrderStrategy();
 		else
 			sortStrategy = new FrequencyOrderStrategy();
