@@ -22,23 +22,26 @@ public class EnglishAbbreviation {
 		return instance;
 	}
 
-	public Properties getEnglishAbbrvProperties() throws FileNotFoundException, IOException {
-
-		String separator = System.getProperty("file.separator");
-		String path = new File(".").getCanonicalPath();
-
-		
+	public Properties getEnglishAbbrvProperties(ConAppOptions options) throws FileNotFoundException, IOException {
+		String propertiesFilePath = null;
 		Properties prop = new Properties();
-		String propertiesFilePath = path + separator + "src" + separator + "main" + separator + "resources" + separator + "english.abbrv.properties";
+		if (options.getAbbrvFilePath() != null) {
+			propertiesFilePath = options.getAbbrvFilePath() ;
+		} else {
+			String separator = System.getProperty("file.separator");
+			String path = new File(".").getCanonicalPath();
 
-		
-		prop.load( new FileInputStream(propertiesFilePath));
-		
+			propertiesFilePath = path + separator + "src" + separator + "main" + separator + "resources" + separator
+					+ "english.abbrv.properties";
+
+		}
+		prop.load(new FileInputStream(propertiesFilePath));
+
 		return prop;
 	}
 	
-	public Hashtable<String, String> getAbbrevTable() throws FileNotFoundException, IOException{
-		Properties prop = getEnglishAbbrvProperties();
+	public Hashtable<String, String> getAbbrevTable(ConAppOptions options) throws FileNotFoundException, IOException{
+		Properties prop = getEnglishAbbrvProperties(options);
 		Hashtable<String, String>  abbrvTable = new Hashtable<>();
 		
 		prop.forEach((key, value) -> abbrvTable.put((String)key, (String)value));
@@ -47,8 +50,8 @@ public class EnglishAbbreviation {
 	}
 	
 	
-	public Hashtable<String, String> getConvertedAbbrevTable() throws FileNotFoundException, IOException{
-		Properties prop = getEnglishAbbrvProperties();
+	public Hashtable<String, String> getConvertedAbbrevTable(ConAppOptions options) throws FileNotFoundException, IOException{
+		Properties prop = getEnglishAbbrvProperties(options);
 		Hashtable<String, String>  abbrvTable = new Hashtable<>();
 		
 		prop.forEach((key, value) -> abbrvTable.put( (String)value, (String)key) );

@@ -11,9 +11,9 @@ public abstract class ParsingTemplate {
 	
 	protected abstract List<String> readFromFile(ConAppOptions options);
 	
-	protected abstract List<String> sanitizing(List<String> rawSentenceList);	
+	protected abstract List<String> sanitizing(List<String> rawSentenceList, ConAppOptions options);	
 	
-	protected abstract List<Word> revertAbbrvBack(List<Word> convertHashtableToList);
+	protected abstract List<Word> revertAbbrvBack(List<Word> convertHashtableToList, ConAppOptions options);
 	
 	protected abstract Hashtable<String, Word> wordTokenizer(List<String> list, ConAppOptions options);
 	
@@ -34,7 +34,7 @@ public abstract class ParsingTemplate {
 			return null;
 		}
 		
-		List<String> pureSentenceList = sanitizing(rawSentenceList);
+		List<String> pureSentenceList = sanitizing(rawSentenceList, options);
 		if(pureSentenceList == null) {
 			return null;
 		}
@@ -43,7 +43,7 @@ public abstract class ParsingTemplate {
 		
 		Hashtable<String, Word> wordTable = wordTokenizer(list, options);
 		
-		List<Word> finalWordList = revertAbbrvBack(AppUtil.convertHashtableToList(wordTable));
+		List<Word> finalWordList = revertAbbrvBack(AppUtil.convertHashtableToList(wordTable), options);
 		
 		return finalWordList;
 	}

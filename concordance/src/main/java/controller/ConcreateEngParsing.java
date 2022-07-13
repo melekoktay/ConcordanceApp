@@ -46,11 +46,11 @@ public class ConcreateEngParsing extends ParsingTemplate {
 	 * @param list
 	 * @return
 	 */
-	protected List<String> sanitizing(List<String> list) {
+	protected List<String> sanitizing(List<String> list, ConAppOptions options) {
 		Hashtable<String, String> abbrTable = null;
 		EnglishAbbreviation engAbbrev = EnglishAbbreviation.instance();
 		try {
-			abbrTable = engAbbrev.getAbbrevTable();
+			abbrTable = engAbbrev.getAbbrevTable(options);
 		} catch (IOException e) {
 			System.err.println("Could not get abbrv. table " + e.getMessage());
 			return null;
@@ -140,11 +140,11 @@ public class ConcreateEngParsing extends ParsingTemplate {
 	 * @param list of words objects.
 	 * @return final result is list of words
 	 */
-	protected List<Word> revertAbbrvBack(List<Word> list) {
+	protected List<Word> revertAbbrvBack(List<Word> list, ConAppOptions options) {
 		Hashtable<String, String> revertedAbbrTable = null;
 		EnglishAbbreviation engAbbrev = EnglishAbbreviation.instance();
 		try {
-			revertedAbbrTable = engAbbrev.getConvertedAbbrevTable();
+			revertedAbbrTable = engAbbrev.getConvertedAbbrevTable(options);
 		} catch (IOException e) {
 			System.err.println("Could not retrieve Abbrv Table " + e.getMessage());
 			return null;

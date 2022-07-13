@@ -4,6 +4,8 @@ public class ConAppOptions {
 	
 	private String filePath = null;
 	
+	private String abbrvFilePath = null;
+	
 	private String lang = null;
 	
 	private String sentenceSeperator = null;
@@ -61,5 +63,14 @@ public class ConAppOptions {
 	public void setSentenceSeperator(String sentenceSeperator) {
 		this.sentenceSeperator = sentenceSeperator;
 	}
+	
+	public String getAbbrvFilePath() {
+		return abbrvFilePath;
+	}
+
+	public void setAbbrvFilePath(String abbrvFilePath) {
+		this.abbrvFilePath = abbrvFilePath;
+	}
+
 
 }
