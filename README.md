@@ -25,8 +25,13 @@ arista.sample.txt input text file
 
 english.abbrv.properties 
 ===========
+<img width="249" alt="abbrvFile" src="https://user-images.githubusercontent.com/6720099/178770703-e53d7b96-a60e-4b3e-9a53-5720c2685504.png">
 
 
 Program Output
 ===========
-<img width="249" alt="abbrvFile" src="https://user-images.githubusercontent.com/6720099/178770703-e53d7b96-a60e-4b3e-9a53-5720c2685504.png">
+
+<img width="321" alt="ConcordanceAppOutput" src="https://user-images.githubusercontent.com/6720099/178771059-1696dd51-67a1-455d-9f62-a92d7eaa9244.png">
+
+
+
