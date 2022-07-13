@@ -17,9 +17,12 @@ java -jar concordance-0.0.1-SNAPSHOT.jar /Users/melekoktay/git/ConcordanceApp/co
 ```
 
 arista.sample.txt
+===========
+[arista.sample.txt](https://github.com/melekoktay/ConcordanceApp/files/9103592/arista.sample.txt)
+
 
 
 english.abbrv.properties
-
+===========
 
 <img width="321" alt="ConcordanceAppOutput" src="https://user-images.githubusercontent.com/6720099/178768086-05dd6fdf-8a40-4516-9090-216c896333da.png">
